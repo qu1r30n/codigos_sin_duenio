@@ -1,0 +1,15 @@
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\bin\Debug\ServidorTCP.exe.config
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\bin\Debug\ServidorTCP.exe
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\bin\Debug\ServidorTCP.pdb
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\bin\Debug\RemoteCore.exe
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\bin\Debug\RemoteCore.pdb
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\bin\Debug\RemoteCore.exe.config
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.csproj.AssemblyReference.cache
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.inicializar.resources
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.Properties.Resources.resources
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.csproj.GenerateResource.cache
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.csproj.CoreCompileInputs.cache
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\Servidor.082D6FEB.Up2Date
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.exe
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.pdb
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ServidorTCP\obj\Debug\ServidorTCP.exe.config

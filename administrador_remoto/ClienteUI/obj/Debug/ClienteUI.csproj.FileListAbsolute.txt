@@ -1,0 +1,16 @@
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.csproj.AssemblyReference.cache
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.FormPantalla.resources
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.FormPrincipal.resources
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.Properties.Resources.resources
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.csproj.GenerateResource.cache
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.csproj.CoreCompileInputs.cache
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\bin\Debug\ClienteUI.exe.config
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\bin\Debug\ClienteUI.exe
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\bin\Debug\ClienteUI.pdb
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\bin\Debug\RemoteCore.exe
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\bin\Debug\RemoteCore.pdb
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\bin\Debug\RemoteCore.exe.config
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.csproj.Up2Date
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.exe
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.pdb
+C:\Users\qu1r30n\source\repos\RemoteCore_junto_todo\ClienteUI\obj\Debug\ClienteUI.exe.config

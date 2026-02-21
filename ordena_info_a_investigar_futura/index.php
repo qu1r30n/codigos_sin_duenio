@@ -187,6 +187,31 @@ $datos = leerDatos($nombreArchivo);
 <html>
 <head>
 <meta charset="UTF-8">
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const campoArchivo = document.querySelector("input[name='archivo']");
+
+    campoArchivo.addEventListener("keydown", function (e) {
+
+        if (e.key === "Enter") {
+
+            e.preventDefault(); // evita que guarde
+
+            let nombre = this.value.trim();
+
+            if (nombre !== "") {
+                window.location.href = "?archivo=" + encodeURIComponent(nombre);
+            }
+
+        }
+
+    });
+
+});
+</script>
+
 <title>Gestor TXT</title>
 
 <style>
@@ -242,6 +267,7 @@ th { background:#f0f0f0; }
 <a href="?archivo=<?php echo $nombreArchivo; ?>">Cancelar</a>
 <?php else: ?>
 <button name="guardar">Guardar</button>
+<button name="Abrir">Abrir</button>
 <?php endif; ?>
 
 </div>

@@ -67,10 +67,7 @@ $datos = leerDatos($nombreArchivo);
 $error = "";
 $editar = null;
 
-// --------------------
-// GUARDAR
-// --------------------
-
+/* GUARDAR */
 if (isset($_POST['guardar'])) {
 
     $titulo = $_POST['titulo'] ?? "";
@@ -109,10 +106,7 @@ if (isset($_POST['guardar'])) {
     }
 }
 
-// --------------------
-// ELIMINAR
-// --------------------
-
+/* ELIMINAR */
 if (isset($_GET['eliminar'])) {
 
     $idEliminar = (float)$_GET['eliminar'];
@@ -126,60 +120,6 @@ if (isset($_GET['eliminar'])) {
     exit;
 }
 
-// --------------------
-// EDITAR
-// --------------------
-
-if (isset($_GET['editar'])) {
-    foreach ($datos as $dato) {
-        if ($dato['id'] == (float)$_GET['editar']) {
-            $editar = $dato;
-            break;
-        }
-    }
-}
-
-// --------------------
-// ACTUALIZAR
-// --------------------
-
-if (isset($_POST['actualizar'])) {
-
-    $idOriginal = (float)$_POST['id_original'];
-    $idInput = trim($_POST['id']);
-
-    list($minId, $maxId) = obtenerMinMax($datos);
-
-    if ($idInput === "") {
-        $nuevoId = ($_POST['posicion'] == "inicio") ? $minId - 1 : $maxId + 1;
-    } else {
-        $nuevoId = (float)$idInput;
-        foreach ($datos as $dato) {
-            if ($dato['id'] == $nuevoId && $dato['id'] != $idOriginal) {
-                $error = "⚠️ Ese ID ya existe.";
-                break;
-            }
-        }
-    }
-
-    if (!$error) {
-
-        foreach ($datos as &$dato) {
-            if ($dato['id'] == $idOriginal) {
-                $dato['id'] = $nuevoId;
-                $dato['titulo'] = $_POST['titulo'] ?? "";
-                $dato['url'] = $_POST['url'] ?? "";
-                $dato['texto'] = $_POST['texto'] ?? "";
-                $dato['texto_sin_codificar'] = $_POST['texto_sin_codificar'] ?? "";
-            }
-        }
-
-        guardarDatos($nombreArchivo, $datos);
-        header("Location: ?archivo=" . $nombreArchivo);
-        exit;
-    }
-}
-
 $datos = leerDatos($nombreArchivo);
 ?>
 
@@ -187,36 +127,11 @@ $datos = leerDatos($nombreArchivo);
 <html>
 <head>
 <meta charset="UTF-8">
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const campoArchivo = document.querySelector("input[name='archivo']");
-
-    campoArchivo.addEventListener("keydown", function (e) {
-
-        if (e.key === "Enter") {
-
-            e.preventDefault(); // evita que guarde
-
-            let nombre = this.value.trim();
-
-            if (nombre !== "") {
-                window.location.href = "?archivo=" + encodeURIComponent(nombre);
-            }
-
-        }
-
-    });
-
-});
-</script>
-
 <title>Gestor TXT</title>
 
 <style>
 body { font-family: Arial; margin:20px; }
-.form-row { display:flex; gap:10px; margin-bottom:8px; }
+.form-row { display:flex; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
 .form-row input, .form-row select { padding:5px; }
 textarea { width:100%; height:120px; resize:vertical; }
 
@@ -232,65 +147,46 @@ th { background:#f0f0f0; }
     padding:5px;
 }
 
-.copy-btn {
+.preview video,
+.preview iframe,
+.preview img {
+    max-width:250px;
     margin-top:5px;
-    font-size:12px;
-    padding:2px 6px;
-    cursor:pointer;
 }
 </style>
 </head>
 <body>
 
 <form method="POST">
-
 <div class="form-row">
 
 <input type="text" name="archivo" value="<?php echo htmlspecialchars($nombreArchivo); ?>">
-
-<?php if($editar): ?>
-<input type="hidden" name="id_original" value="<?php echo $editar['id']; ?>">
-<?php endif; ?>
-
-<input type="number" step="0.01" name="id" placeholder="ID" value="<?php echo $editar['id'] ?? ''; ?>">
-
+<input type="number" step="0.01" name="id" placeholder="ID">
 <select name="posicion">
 <option value="final">Final</option>
 <option value="inicio">Inicio</option>
 </select>
-
-<input type="text" name="titulo" placeholder="Título" value="<?php echo $editar['titulo'] ?? ''; ?>">
-<input type="text" name="url" placeholder="URL" value="<?php echo $editar['url'] ?? ''; ?>">
-
-<?php if($editar): ?>
-<button name="actualizar">Actualizar</button>
-<a href="?archivo=<?php echo $nombreArchivo; ?>">Cancelar</a>
-<?php else: ?>
+<input type="text" name="titulo" placeholder="Título">
+<input type="text" name="url" placeholder="URL">
 <button name="guardar">Guardar</button>
-<button name="Abrir">Abrir</button>
-<?php endif; ?>
 
 </div>
 
 <div class="form-row">
-<textarea name="texto" placeholder="Texto (base64)..."><?php echo $editar['texto'] ?? ''; ?></textarea>
+<textarea name="texto" placeholder="Texto (base64)..."></textarea>
 </div>
 
 <div class="form-row">
-<textarea name="texto_sin_codificar" placeholder="Texto sin codificar..."><?php echo $editar['texto_sin_codificar'] ?? ''; ?></textarea>
+<textarea name="texto_sin_codificar" placeholder="Texto sin codificar..."></textarea>
 </div>
 
 </form>
-
-<?php if($error): ?>
-<p style="color:red;"><?php echo $error; ?></p>
-<?php endif; ?>
 
 <table>
 <tr>
 <th>ID</th>
 <th>Título</th>
-<th>URL</th>
+<th>URL / Vista previa</th>
 <th>Texto</th>
 <th>Texto sin codificar</th>
 <th>Acciones</th>
@@ -301,24 +197,61 @@ th { background:#f0f0f0; }
 
 <td><?php echo $d['id']; ?></td>
 <td><?php echo htmlspecialchars($d['titulo']); ?></td>
-<td><?php if($d['url']): ?><a href="<?php echo htmlspecialchars($d['url']); ?>" target="_blank">Abrir</a><?php endif; ?></td>
+
+<td class="preview">
+
+<?php if($d['url']): 
+$url = htmlspecialchars($d['url']);
+?>
+
+<a href="<?php echo $url; ?>" target="_blank">Abrir</a><br>
+
+<?php
+if (preg_match('/youtube\.com|youtu\.be/', $url)) {
+
+    if (strpos($url, 'watch?v=') !== false) {
+        $videoId = explode('watch?v=', $url)[1];
+        $videoId = explode('&', $videoId)[0];
+    } elseif (strpos($url, 'youtu.be/') !== false) {
+        $videoId = explode('youtu.be/', $url)[1];
+    }
+
+    echo '<iframe width="250" height="150"
+        src="https://www.youtube.com/embed/'.$videoId.'"
+        frameborder="0" allowfullscreen></iframe>';
+
+}
+elseif (preg_match('/\.(mp4|webm|ogg)$/i', $url)) {
+
+    echo '<video controls>
+            <source src="'.$url.'">
+          </video>';
+
+}
+elseif (preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $url)) {
+
+    echo '<img src="'.$url.'">';
+
+}
+?>
+
+<?php endif; ?>
+
+</td>
 
 <td>
-<div class="scrollbox" id="texto_<?php echo $d['id']; ?>">
+<div class="scrollbox">
 <?php echo htmlspecialchars($d['texto']); ?>
 </div>
-<button class="copy-btn" onclick="copiarCelda('texto_<?php echo $d['id']; ?>')">Copiar</button>
 </td>
 
 <td>
-<div class="scrollbox" id="texto2_<?php echo $d['id']; ?>">
+<div class="scrollbox">
 <?php echo htmlspecialchars($d['texto_sin_codificar']); ?>
 </div>
-<button class="copy-btn" onclick="copiarCelda('texto2_<?php echo $d['id']; ?>')">Copiar</button>
 </td>
 
 <td>
-<a href="?editar=<?php echo $d['id']; ?>&archivo=<?php echo $nombreArchivo; ?>">Editar</a><br>
 <a href="?eliminar=<?php echo $d['id']; ?>&archivo=<?php echo $nombreArchivo; ?>" onclick="return confirm('Eliminar?')">Eliminar</a>
 </td>
 
@@ -326,15 +259,6 @@ th { background:#f0f0f0; }
 <?php endforeach; ?>
 
 </table>
-
-<script>
-function copiarCelda(id) {
-    const texto = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(texto).then(() => {
-        alert("Contenido copiado");
-    });
-}
-</script>
 
 </body>
 </html>

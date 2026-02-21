@@ -50,13 +50,23 @@ function guardarDatos($archivo, $datos) {
 
     $contenido = "";
     foreach ($datos as $dato) {
+if($dato['texto']!=""){
+    
         // Convertimos cada registro en una línea con formato: id|titulo|url|texto_en_base64
         $contenido .= $dato['id'] . "|" .
                       $dato['titulo'] . "|" .
                       $dato['url'] . "|" .
                       base64_encode($dato['texto']) . "\n";
-    }
+    }else{
 
+        // Convertimos cada registro en una línea con formato: id|titulo|url|texto_en_base64
+        $contenido .= $dato['id'] . "|" .
+                      $dato['titulo'] . "|" .
+                      $dato['url'] . "|" .
+                      $dato['url'] . "\n";
+}
+
+}
     // Guardamos el contenido en el archivo
     file_put_contents($archivo, $contenido);
 }
